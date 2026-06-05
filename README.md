@@ -1,57 +1,61 @@
-# final_diana_chigrina
-# Fitness Club Database Project
 
-## Domain
-This project is a Fitness Club Management System database.  
+final_diana_chigrina
+Fitness Club Database Project
+
+Domain
+This project is a Fitness Club Management System database.
 It manages members, trainers, fitness classes, equipment, memberships, attendance, and payments.
 
----
-
-## Database Name
+Database Name
 fitness_club_db
 
-## Schema Name
+Schema Name
 fitness_club
 
----
-
-## Project Description
+Project Description
 The database is designed to manage operations inside a fitness club:
 
-- Members can buy memberships and attend classes
-- Trainers conduct fitness classes
-- Classes use equipment
-- Payments track membership fees
-- Attendance tracks which members attended which classes
+Members can register, buy memberships, and attend fitness classes
+Trainers conduct fitness classes based on their specialization
+Fitness classes are linked with trainers and can use different equipment
+Equipment inventory is tracked with stock control
+Memberships define subscription types (Basic, Standard, Premium)
+Payments track membership fees and automatically calculate tax
+Attendance tracks which members attended which classes
+The system is normalized to 3rd Normal Form (3NF) and includes:
 
-The system is normalized to 3rd Normal Form (3NF) and includes relationships:
-- One-to-many (1:N)
-- Many-to-many (M:N via junction tables)
+One-to-many relationships (1:N)
+Many-to-many relationships (M:N via junction tables)
+Referential integrity with foreign keys and cascading rules
 
----
+Key Features
+- Automatic tax calculation using GENERATED column (12%)
+- Data validation using CHECK constraints (salary, dates, status, etc.)
+- DEFAULT values for timestamps and payment status
+- ON DELETE CASCADE and SET NULL rules for data integrity
+- Role-based access control (fitness_readonly, fitness_writer)
+- Transaction example with DELETE + ROLLBACK
+- ALTER TABLE operations (add column, rename column, modify constraints)
 
-## How to Run
+How to Run
+Open PostgreSQL (pgAdmin, DBeaver, or psql terminal)
 
-1. Open PostgreSQL (pgAdmin)
-2. Create a new database:
-   CREATE DATABASE fitness_club_db;
+Create database:
+CREATE DATABASE fitness_club_db;
 
-3. Run the SQL script in this order:
-   - DROP SCHEMA (if exists)
-   - CREATE TABLES
-   - ALTER TABLE
-   - INSERT DATA
-   - UPDATE statements
-   - DELETE transaction
-   - GRANT / REVOKE
+Run SQL script in this order:
+1. CREATE SCHEMA
+2. CREATE TABLES
+3. ALTER TABLE statements
+4. INSERT DATA
+5. UPDATE statements
+6. DELETE transaction (ROLLBACK example)
+7. GRANT / REVOKE permissions
 
-4. Set schema:
-   SET search_path TO fitness_club;
+Set schema:
+SET search_path TO fitness_club;
 
----
-
-## Main Tables
-
+Main Tables
 - members
 - trainers
 - fitness_classes
@@ -61,11 +65,11 @@ The system is normalized to 3rd Normal Form (3NF) and includes relationships:
 - attendance
 - class_equipment
 
----
-
-## Notes for Instructor
-- All foreign keys use subqueries (no hard-coded IDs)
-- Script is fully re-runnable
-- Includes 5 ALTER TABLE operations
-- Includes GENERATED column and DEFAULT values
-- Includes transactions for DELETE (ROLLBACK used)
+Notes for Instructor
+- All foreign keys use subqueries instead of hard-coded IDs
+- Script is fully re-runnable using TRUNCATE with RESTART IDENTITY CASCADE
+- Includes 5 ALTER TABLE operations (add, rename, modify constraints, type changes)
+- Includes GENERATED column for tax calculation
+- Includes role-based security (read-only vs writer access)
+- Includes transaction example with ROLLBACK for safe testing
+```
